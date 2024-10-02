@@ -1,0 +1,30 @@
+<!doctype html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="parent(content, title, script)"
+>
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title th:replace="${title}">Base | Smart Contact Manager</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/responsive.css}">
+
+    <link rel="icon" th:href="@{/images/SCM.webp}">
+
+</head>
+<body>
+
+<div th:replace="~{navbar :: navbar}"></div>
+<section th:replace="${content}"></section>
+<script th:src="@{/scripts/app.js}"></script>
+<th:block th:replace="${script}"></th:block>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+@font-face {
+    src: url("../font/JetBrainsMono-Regular.woff") format("woff"),
+        url("../font/JetBrainsMono-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --background-color: #121212;
+    --main-color: #03A866;
+    --primary-text-color: #C7C7C8;
+    --secondary-text-color: #A0A0A5;
+    --btn-hover-color: #05E78D;
+
+    --line-color: #404040;
+
+    --color-filter: invert(1);
+    --transparent-color-01: rgba(106, 89, 209, 0.25);
+    --box-shadow: 0px 0px 25px rgba(255, 255, 255, 0.1);
+    --modal-bg-color: #2A2A2E;
+
+    --title-font-size: 4rem;
+    --sub-title-font-size: 2.5rem;
+    --paragraph-font-size: 1.2rem;
+    --normal-font-size: 1rem;   /*for navbar links and button text*/
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+button,
+input,
+textarea,
+body{
+    font-family: 'JetBrains Mono', monospace;
+}
+
+body{
+    background: var(--background-color);
+    color: var(--primary-text-color);
+}
+
+a{
+    text-decoration: none;
+}
+
+ul{
+    list-style-type: none;
+}
+
+img{
+    width: 100%;
+}
+
+section{
+    padding: 7rem 0;
+    overflow: hidden;
+}
+.btn{
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 1.2rem;
+    background: var(--main-color);
+    color: #fff;
+    font-size: var(--normal-font-size);
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn:hover{
+    background: var(--btn-hover-color);
+    color: #121212;
+}
+
+/* navigation bar */
+header {
+    z-index: 1000;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: .6s;
+}
+
+.nav-bar {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80.35rem;
+    height: calc(4rem + 1rem);
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* project logo */
+.logo {
+    font-size: var(--sub-title-font-size);
+    font-weight: 900;
+    cursor: default;
+    color: var(--primary-text-color);
+}
+
+.logo span{
+    color: var(--main-color);
+}
+
+/* links */
+.nav-items{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-link{
+    color: var(--primary-text-color);
+    font-size: var(--normal-font-size);
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-right: 3rem;
+    cursor: pointer;
+}
+
+.nav-link:hover{
+    color: var(--btn-hover-color);
+}
+
+/* mobile view */
+.nav-menu-btn{
+    display: none;
+}

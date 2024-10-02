@@ -1,0 +1,41 @@
+<!doctype html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="~{base :: parent(~{}, ~{:: title}, ~{:: script})}"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Navbar | Smart Contact Manager</title>
+</head>
+<body>
+<header th:fragment="navbar">
+    <div class="nav-bar">
+        <a th:href="@{/home}" class="logo">SCM<span>.</span></a>
+
+        <div class="navigation">
+            <div class="nav-items">
+                <div class="nav-close-btn"></div>
+
+                <a th:href="@{/home}" class="nav-link active">Home</a>
+                <a th:href="@{/about}" class="nav-link">About</a>
+                <a th:href="@{/services}" class="nav-link">Services</a>
+                <a th:href="@{/contact}" class="nav-link">Contact</a>
+
+                <div class="nav-auth-btns">
+                    <a th:href="@{/login}" class="btn">Login</a>
+                    <a th:href="@{/sign-up}" class="btn">Sign-Up</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu button for mobile view -->
+        <div class="nav-menu-btn"></div>
+    </div>
+</header>
+<script th:src="@{/scripts/home.js}"></script>
+</body>
+</html>
