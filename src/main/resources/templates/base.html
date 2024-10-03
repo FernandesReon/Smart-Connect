@@ -20,10 +20,14 @@
 
 </head>
 <body>
-
+<!--Common navigation bar-->
 <div th:replace="~{navbar :: navbar}"></div>
+
+<!--Dynamic Content-->
 <section th:replace="${content}"></section>
+
 <script th:src="@{/scripts/app.js}"></script>
+<script th:src="@{/scripts/home.js}"></script>
 <th:block th:replace="${script}"></th:block>
 
 </body>

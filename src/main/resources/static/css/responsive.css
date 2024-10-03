@@ -9,7 +9,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: var(--transparent-color-01);
+        background: var(--background-color);
         visibility: hidden;
         opacity: 0;
         transition: .3s ease;
@@ -44,12 +44,18 @@
         margin: 15px 20px;
     }
 
+    .nav-auth-btns a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .nav-menu-btn {
         filter: var(--color-filter);
         background-size: 20px;
         background: url(../icons/bars-solid.svg) no-repeat center;
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         cursor: pointer;
         display: block;
     }
@@ -59,8 +65,8 @@
         filter: var(--color-filter);
         background-size: 20px;
         background: url(../icons/xmark-solid.svg) no-repeat center;
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         top: 0;
         right: 0;
         margin: 10px;
