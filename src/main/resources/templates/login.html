@@ -16,7 +16,37 @@
     <title>Login | Smart Contact Manager</title>
 </head>
 <body>
-<section id="content"></section>
+<section class="access"  id="content">
+    <div class="access-container flex-center">
+        <h2>Login</h2>
+        <p>
+            Welcome back to Smart Contact Manager!
+            Please enter your details.
+        </p>
+        <form action="#" method="post" class="access-form login">
+
+            <div class="double-IO">
+                <input type="email" name="user_email" id="email" placeholder="Email-ID" autocomplete="email"
+                       required>
+                <input type="password" name="user_password" id="password" placeholder="Password"
+                       autocomplete="new-password" required>
+            </div>
+            <div class="forgot">
+                <a href="#">Forgot password ?</a>
+            </div>
+            <button type="submit" class="btn">Sign-Up</button>
+
+            <div class="hr"></div>
+
+            <div class="social-auth-btns">
+                <button type="button" class="auth">Sign-up with Google</button>
+                <span>OR</span>
+                <button type="button" class="auth">Sign-up with GitHub</button>
+            </div>
+
+        </form>
+    </div>
+</section>
 <script>
     console.log("Welcome to Login Page");
 </script>

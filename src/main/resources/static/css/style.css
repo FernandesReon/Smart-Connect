@@ -1,18 +1,20 @@
 @font-face {
-    src: url("../font/JetBrainsMono-Regular.woff") format("woff"),
-        url("../font/JetBrainsMono-Regular.woff2") format("woff2");
+    font-family: "JetBrains Mono";
+    src: url(/assets/fonts/JetBrainsMono-Regular.woff2) format("woff2"),
+    url(/assets/fonts/JetBrainsMono-Regular.woff) format("woff"),
+    url(/assets/fonts/JetBrainsMono-Regular.ttf) format("ttf");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root{
+:root {
     --background-color: #121212;
     --main-color: #03A866;
     --primary-text-color: #C7C7C8;
@@ -28,43 +30,47 @@
 
     --title-font-size: 4rem;
     --sub-title-font-size: 2.5rem;
-    --paragraph-font-size: 1.2rem;
-    --normal-font-size: 1rem;   /*for navbar links and button text*/
+    --paragraph-font-size: 1.1rem;
+    --normal-font-size: 1rem; /* for navbar links and button text */
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
 button,
 input,
+select,
 textarea,
-body{
+body {
     font-family: 'JetBrains Mono', monospace;
 }
 
-body{
+body {
     background: var(--background-color);
     color: var(--primary-text-color);
 }
 
-a{
+a {
     text-decoration: none;
+    color: var(--secondary-text-color);
 }
 
-ul{
+ul {
     list-style-type: none;
 }
 
-img{
+img {
     width: 100%;
 }
 
-section{
-    padding: 7rem 0;
+section {
+    margin: 2rem auto;
+    max-width: 80.35rem;
     overflow: hidden;
 }
-.btn{
+
+.btn {
     display: inline-block;
     padding: 0.6rem 1.2rem;
     border: none;
@@ -74,20 +80,24 @@ section{
     font-size: var(--normal-font-size);
     text-transform: uppercase;
     cursor: pointer;
+    transition: background 0.3s, color 0.3s;
 }
 
-.btn:hover{
+.btn:hover {
     background: var(--btn-hover-color);
     color: #121212;
 }
 
-/* navigation bar */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Navigation Bar */
 header {
     z-index: 1000;
     width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
     transition: .6s;
 }
 
@@ -96,13 +106,14 @@ header {
     margin-right: auto;
     max-width: 80.35rem;
     height: calc(4rem + 1rem);
-    padding: 0 2rem;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid var(--line-color);
 }
 
-/* project logo */
+/* Project Logo */
 .logo {
     font-size: var(--sub-title-font-size);
     font-weight: 900;
@@ -110,31 +121,196 @@ header {
     color: var(--primary-text-color);
 }
 
-.logo span{
+.logo span {
     color: var(--main-color);
 }
 
-/* links */
-.nav-items{
+/* Links */
+.nav-items {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.nav-link{
+.nav-link {
     color: var(--primary-text-color);
     font-size: var(--normal-font-size);
     font-weight: 500;
     text-transform: uppercase;
     margin-right: 3rem;
     cursor: pointer;
+    transition: color 0.3s;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     color: var(--btn-hover-color);
 }
 
-/* mobile view */
-.nav-menu-btn{
+/* Mobile View */
+.nav-menu-btn {
     display: none;
+}
+
+/* Sign-Up and Login Page */
+.access,
+.contact {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.access .access-container,
+.contact .contact-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 0 auto;
+    line-height: 1.5rem;
+}
+
+.access-container h2,
+.contact-container h2 {
+    font-size: var(--sub-title-font-size);
+    margin: 1rem auto;
+}
+
+.access-container span {
+    color: var(--main-color);
+}
+
+.access-container p,
+.contact-container p {
+    color: var(--secondary-text-color);
+    font-size: var(--paragraph-font-size);
+    font-style: italic;
+    margin: 1rem auto;
+    text-align: justify;
+}
+
+.access-form,
+.contact-form {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.access-form input,
+.access-form select,
+.access-form textarea,
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.8rem;
+    border: 2px solid var(--secondary-text-color);
+    border-radius: 0.5rem;
+    outline: none;
+    background: var(--background-color);
+    color: var(--primary-text-color);
+    font-size: var(--normal-font-size);
+}
+
+.access-form input:focus,
+.access-form select:focus,
+.access-form textarea:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--main-color);
+}
+
+::placeholder {
+    font-size: var(--normal-font-size);
+    color: var(--secondary-text-color);
+}
+
+.access-form .double-IO input,
+.access-form .double-IO select,
+.contact-form .double-IO input {
+    width: 50%;
+}
+
+.access-form .double-IO,
+.contact-form .double-IO {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.double-IO select,
+.double-IO select option {
+    color: var(--secondary-text-color);
+    font-size: var(--normal-font-size);
+}
+
+.single-IO textarea {
+    resize: none;
+}
+
+.hr {
+    margin-top: 1rem;
+    border-bottom: 2px dotted var(--line-color);
+}
+
+.social-auth-btns {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: var(--normal-font-size);
+}
+
+.social-auth-btns .auth {
+    display: inline-block;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 1.5rem;
+    font-size: var(--normal-font-size);
+    font-weight: 500;
+    background-color: var(--primary-text-color);
+    color: var(--background-color);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.social-auth-btns .auth:hover {
+    background-color: var(--btn-hover-color);
+    color: #121212;
+}
+
+.social-auth-btns span {
+    color: var(--primary-text-color);
+    font-size: var(--paragraph-font-size);
+}
+
+/* Select and Datalist Styling */
+.access-form select {
+    appearance: none;
+    background: var(--background-color);
+    color: var(--primary-text-color);
+    padding: 1rem;
+    border: 1px solid var(--secondary-text-color);
+    border-radius: 0.5rem;
+    font-size: var(--normal-font-size);
+    outline: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%23C7C7C8"><path d="M6 8L0 2h12L6 8z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 12px;
+    cursor: pointer;
+}
+
+.access-form select:focus {
+    border-color: var(--main-color);
+}
+
+.forgot{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+.forgot a{
+    z-index: 1000;
+    margin-bottom: 1rem;
 }

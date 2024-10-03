@@ -16,7 +16,34 @@
     <title>Contact | Smart Contact Manager</title>
 </head>
 <body>
-<section id="content"></section>
+<section class="contact" id="content">
+    <div class="contact-container flex-center">
+        <h2>Contact Us</h2>
+        <p>
+            We'd love to hear from you! Whether you have a question, a question,
+            a project idea, or just say hello, drop us a message and we'll get
+            back to you as soon as possible.
+        </p>
+        <form action="#" method="post" class="contact-form">
+
+            <div class="single-IO">
+                <input type="text" name="user_name" id="name" placeholder="Full Name" autocomplete="name" required>
+            </div>
+
+            <div class="double-IO">
+                <input type="email" name="user_email" id="email" placeholder="Email-ID" autocomplete="off" required>
+                <input type="text" name="topic" id="topic" placeholder="Query Topic" autocomplete="off" required>
+            </div>
+
+            <div class="single-IO">
+                    <textarea name="feedback" id="message" rows="5" placeholder="Query / Feedback" autocomplete="off"
+                              required></textarea>
+            </div>
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+</section>
 <script>
     console.log("Welcome to Contact Page");
 </script>
