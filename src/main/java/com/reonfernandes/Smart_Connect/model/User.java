@@ -29,6 +29,12 @@ public class User {
     @Column(nullable = false)
     private String gender;
 
+    @Column(nullable = false)
+    private String role;
+
+    @Column(nullable = false)
+    private String region;
+
     @Column(nullable = false, length = 1000)
     private String address;
 
@@ -36,11 +42,6 @@ public class User {
 
     @Column(nullable = false, length = 15)
     private String phoneNumber;
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
-    private List<String> roles;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Contact> contactList;

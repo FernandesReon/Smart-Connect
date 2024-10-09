@@ -1,8 +1,8 @@
 @font-face {
     font-family: "JetBrains Mono";
-    src: url(/assets/fonts/JetBrainsMono-Regular.woff2) format("woff2"),
-    url(/assets/fonts/JetBrainsMono-Regular.woff) format("woff"),
-    url(/assets/fonts/JetBrainsMono-Regular.ttf) format("ttf");
+    src: url(../font/JetBrainsMono-Regular.woff2) format("woff2"),
+    url(../font/JetBrainsMono-Regular.woff) format("woff"),
+    url(../font/JetBrainsMono-Regular.ttf) format("ttf");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -313,4 +313,15 @@ header {
 .forgot a{
     z-index: 1000;
     margin-bottom: 1rem;
+}
+
+.signUp-Btns{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.signUp-Btns .reset{
+    background: rgb(255, 0, 0);
 }
