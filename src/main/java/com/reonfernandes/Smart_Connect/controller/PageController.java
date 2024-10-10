@@ -1,25 +1,39 @@
 package com.reonfernandes.Smart_Connect.controller;
 
+import com.reonfernandes.Smart_Connect.model.Providers;
+import com.reonfernandes.Smart_Connect.service.implement.UserServiceImpl;
 import com.reonfernandes.Smart_Connect.form.UserForm;
+import com.reonfernandes.Smart_Connect.model.User;
+import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Data
 @Controller
 public class PageController {
 
-    // Step 1: Declare a static logger instance
-    private static final Logger logger = LoggerFactory.getLogger(PageController.class);
+    @Value("${user.default.profilePic}")
+    private String defaultIcon;
+
+    private final UserServiceImpl userServices;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private static final List<String> genders = Arrays.asList("Male", "Female", "Others");
     private static final List<String> roles = Arrays.asList("Admin", "User", "Member", "Guest");
     private static final List<String> regions = Arrays.asList(
             "Asia", "Africa", "Europe", "Australia", "North America", "South America");
+
+    public PageController(UserServiceImpl userServices) {
+        this.userServices = userServices;
+    }
 
     @GetMapping("/home")
     public String homePage(){
@@ -70,8 +84,27 @@ public class PageController {
 
     // Processing Form (Sign-Up)
     @PostMapping("/register-form")
-    public String processSignUpForm(){
+    public String processSignUpForm(@ModelAttribute UserForm userForm){
+        System.out.println(userForm.toString());
         logger.info("Processing Form");
+
+        User user = User.builder()
+                .name(userForm.getName())
+                .email(userForm.getEmail())
+                .password(userForm.getPassword())
+                .gender(userForm.getGender())
+                .phoneNumber(userForm.getPhoneNumber())
+                .role(userForm.getRole())
+                .region(userForm.getRegion())
+                .address(userForm.getAddress())
+                .profilePic(defaultIcon)
+//                .providers(Providers.SELF)
+                .build();
+
+        User savedUser = userServices.saveUser(user);
+        logger.info("User is saved with ID: {}", user.getId());
+
+
         return "redirect:/sign-up";
     }
 }

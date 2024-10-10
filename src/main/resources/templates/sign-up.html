@@ -52,7 +52,7 @@
 
             <div class="double-IO">
 
-                <select name="user_country" id="country" th:field="*{region}" required>
+                <select name="user_region" id="region" th:field="*{region}" required>
                     <option value="" th:text="'Select Region'"  disabled selected
                             th:if="${userForm.region == null || #strings.isEmpty(userForm.region)}"></option>
                     <option th:each="regions : ${regions}" th:value="${regions}" th:text="${regions}"></option>
@@ -73,7 +73,7 @@
 
             <div class="signUp-Btns">
                 <button type="submit" class="btn">Sign-Up</button>
-                <button type="reset" class="btn reset">Reset</button>
+<!--                <button type="reset" class="btn reset">Reset</button>-->
             </div>
 
             <div class="hr"></div>
