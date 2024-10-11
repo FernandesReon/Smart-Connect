@@ -23,6 +23,7 @@
             Sign up to start managing your contacts easily and securely in one place,
             anytime and anywhere.
         </p>
+
         <form th:action="@{/register-form}" method="post" class="access-form" th:object="${userForm}">
             <div class="single-IO">
                 <input th:field="*{name}" type="text" name="user_name" id="name" placeholder="Full Name"
@@ -75,6 +76,11 @@
                 <button type="submit" class="btn">Sign-Up</button>
 <!--                <button type="reset" class="btn reset">Reset</button>-->
             </div>
+            <br>
+            <!-- Display success message -->
+            <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+            <!-- Display error message -->
+            <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
 
             <div class="hr"></div>
 
@@ -90,5 +96,6 @@
 <script>
     console.log("Welcome to Sign-Up Page");
 </script>
+
 </body>
 </html>

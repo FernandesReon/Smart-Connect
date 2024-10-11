@@ -4,6 +4,7 @@ import com.reonfernandes.Smart_Connect.model.Providers;
 import com.reonfernandes.Smart_Connect.service.implement.UserServiceImpl;
 import com.reonfernandes.Smart_Connect.form.UserForm;
 import com.reonfernandes.Smart_Connect.model.User;
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,7 +68,7 @@ public class PageController {
     }
 
     @GetMapping("/sign-up")
-    public String signUpPage(Model model){
+    public String signUpPage(Model model, HttpSession session){
         UserForm userForm = new UserForm();
         userForm.setGender("");
         userForm.setRole("");
@@ -78,17 +79,29 @@ public class PageController {
         model.addAttribute("roles", roles);
         model.addAttribute("regions", regions);
 
+        // Retrieve and clear session attributes
+        if (session.getAttribute("success") != null) {
+            model.addAttribute("success", session.getAttribute("success"));
+            session.removeAttribute("success"); // Clear the success message
+        }
+        if (session.getAttribute("error") != null) {
+            model.addAttribute("error", session.getAttribute("error"));
+            session.removeAttribute("error"); // Clear the error message
+        }
+
+
         logger.info("Sign-Up page loaded.");
         return "sign-up";
     }
 
     // Processing Form (Sign-Up)
     @PostMapping("/register-form")
-    public String processSignUpForm(@ModelAttribute UserForm userForm){
+    public String processSignUpForm(@ModelAttribute UserForm userForm, HttpSession session){
         System.out.println(userForm.toString());
         logger.info("Processing Form");
 
-        User user = User.builder()
+         /*
+         User user = User.builder()
                 .name(userForm.getName())
                 .email(userForm.getEmail())
                 .password(userForm.getPassword())
@@ -98,12 +111,28 @@ public class PageController {
                 .region(userForm.getRegion())
                 .address(userForm.getAddress())
                 .profilePic(defaultIcon)
-//                .providers(Providers.SELF)
+                .providers(Providers.SELF)
                 .build();
+           */
+        try{
+            User user = new User();
+            user.setName(userForm.getName());
+            user.setEmail(userForm.getEmail());
+            user.setPassword(userForm.getPassword());
+            user.setGender(userForm.getGender());
+            user.setPhoneNumber(userForm.getPhoneNumber());
+            user.setRole(userForm.getRole());
+            user.setRegion(userForm.getRegion());
+            user.setAddress(userForm.getAddress());
+            user.setProfilePic(defaultIcon);
 
-        User savedUser = userServices.saveUser(user);
-        logger.info("User is saved with ID: {}", user.getId());
+            User savedUser = userServices.saveUser(user);
+            session.setAttribute("success", "Success! Your account has been created.");
+        }
+        catch (Exception e){
+            session.setAttribute("error", "Error! There was an issue creating your account. Please try again.");
 
+        }
 
         return "redirect:/sign-up";
     }
