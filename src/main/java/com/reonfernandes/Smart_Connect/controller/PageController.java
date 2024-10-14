@@ -1,19 +1,18 @@
 package com.reonfernandes.Smart_Connect.controller;
 
-import com.reonfernandes.Smart_Connect.model.Providers;
 import com.reonfernandes.Smart_Connect.service.implement.UserServiceImpl;
 import com.reonfernandes.Smart_Connect.form.UserForm;
 import com.reonfernandes.Smart_Connect.model.User;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,38 +36,37 @@ public class PageController {
     }
 
     @GetMapping("/home")
-    public String homePage(){
-        // Step 2: Use the logger instead of System.out.println
+    public String homePage() {
         logger.info("Home page loaded.");
         return "home";
     }
 
     @GetMapping("/about")
-    public String aboutPage(){
+    public String aboutPage() {
         logger.info("About page loaded.");
         return "about";
     }
 
     @GetMapping("/services")
-    public String servicesPage(){
+    public String servicesPage() {
         logger.info("Services page loaded.");
         return "services";
     }
 
     @GetMapping("/contact")
-    public String contactPage(){
+    public String contactPage() {
         logger.info("Contact page loaded.");
         return "contact";
     }
 
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage() {
         logger.info("Login page loaded.");
         return "login";
     }
 
     @GetMapping("/sign-up")
-    public String signUpPage(Model model, HttpSession session){
+    public String signUpPage(Model model, HttpSession session) {
         UserForm userForm = new UserForm();
         userForm.setGender("");
         userForm.setRole("");
@@ -84,11 +82,10 @@ public class PageController {
             model.addAttribute("success", session.getAttribute("success"));
             session.removeAttribute("success"); // Clear the success message
         }
-        if (session.getAttribute("error") != null) {
-            model.addAttribute("error", session.getAttribute("error"));
-            session.removeAttribute("error"); // Clear the error message
+        if (session.getAttribute("errorMsg") != null) {
+            model.addAttribute("errorMsg", session.getAttribute("errorMsg"));
+            session.removeAttribute("errorMsg"); // Clear the error message
         }
-
 
         logger.info("Sign-Up page loaded.");
         return "sign-up";
@@ -96,25 +93,22 @@ public class PageController {
 
     // Processing Form (Sign-Up)
     @PostMapping("/register-form")
-    public String processSignUpForm(@ModelAttribute UserForm userForm, HttpSession session){
-        System.out.println(userForm.toString());
+    public String processSignUpForm(
+            @Valid @ModelAttribute("userForm") UserForm userForm,
+            BindingResult bindingResult,
+            Model model,
+            HttpSession session) {
+
         logger.info("Processing Form");
 
-         /*
-         User user = User.builder()
-                .name(userForm.getName())
-                .email(userForm.getEmail())
-                .password(userForm.getPassword())
-                .gender(userForm.getGender())
-                .phoneNumber(userForm.getPhoneNumber())
-                .role(userForm.getRole())
-                .region(userForm.getRegion())
-                .address(userForm.getAddress())
-                .profilePic(defaultIcon)
-                .providers(Providers.SELF)
-                .build();
-           */
-        try{
+        if (bindingResult.hasErrors()) {
+            // Repopulate the lists
+            model.addAttribute("genders", genders);
+            model.addAttribute("roles", roles);
+            model.addAttribute("regions", regions);
+            return "sign-up";
+        }
+        try {
             User user = new User();
             user.setName(userForm.getName());
             user.setEmail(userForm.getEmail());
@@ -126,14 +120,20 @@ public class PageController {
             user.setAddress(userForm.getAddress());
             user.setProfilePic(defaultIcon);
 
-            User savedUser = userServices.saveUser(user);
+            userServices.saveUser(user);
             session.setAttribute("success", "Success! Your account has been created.");
-        }
-        catch (Exception e){
-            session.setAttribute("error", "Error! There was an issue creating your account. Please try again.");
-
+        } catch (Exception e) {
+            logger.error("Error while creating user: ", e);
+            session.setAttribute("errorMsg", "Error! There was an issue creating your account. Please try again.");
         }
 
         return "redirect:/sign-up";
+    }
+
+    @ModelAttribute
+    public void addCommonAttributes(Model model) {
+        model.addAttribute("genders", genders);
+        model.addAttribute("roles", roles);
+        model.addAttribute("regions", regions);
     }
 }

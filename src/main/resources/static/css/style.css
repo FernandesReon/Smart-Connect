@@ -152,6 +152,15 @@ header {
 }
 
 /* Sign-Up and Login Page */
+.double-IO > div{
+    width: 50%;
+    flex: 1;
+    margin-bottom: 0.5rem;
+}
+
+.double-IO div > input{
+    margin: 0 auto;
+}
 .access,
 .contact {
     padding: 1rem;
@@ -175,6 +184,14 @@ header {
     margin: 1rem auto;
 }
 
+/* Error Message Styling */
+.error {
+    color: #d91325; /* Same as .alert-error text color */
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
 .access-container span {
     color: var(--main-color);
 }
@@ -184,7 +201,7 @@ header {
     color: var(--secondary-text-color);
     font-size: var(--paragraph-font-size);
     font-style: italic;
-    margin: 1rem auto;
+    /*margin: 1rem auto;*/
     text-align: justify;
 }
 
@@ -226,7 +243,7 @@ header {
 .access-form .double-IO input,
 .access-form .double-IO select,
 .contact-form .double-IO input {
-    width: 50%;
+    width: 100%;
 }
 
 .access-form .double-IO,
@@ -348,3 +365,4 @@ header {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
+

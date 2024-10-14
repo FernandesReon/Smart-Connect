@@ -14,7 +14,7 @@
 <div th:fragment="alert(type, message)">
     <div th:if="${message != null}" class="alert" th:classappend="${type}">
         <div th:if="${type == 'success'}" class="alert alert-success" id="successAlert" th:text="${message}"></div>
-        <div th:if="${type == 'error'}" class="alert alert-error" id="errorAlert" th:text="${message}"></div>
+        <div th:if="${type == 'errorMsg'}" class="alert alert-error" id="errorAlert" th:text="${message}"></div>
     </div>
 </div>
 
